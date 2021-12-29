@@ -32,7 +32,7 @@ const UserSchema = new Schema({
     },
     rol: {
         type: String,
-        enum: ['ADMINISTRATOR', 'SELLER'],
+        enum: ['ADMINISTRATOR', 'SELLER', ''],
         default: ''
     },
     state: {

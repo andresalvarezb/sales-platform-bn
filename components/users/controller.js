@@ -7,25 +7,16 @@ class UsersController {
 
     addUser(user) {
         return new Promise((resolve, reject) => {
-            if (!user) {
-                reject('Invalid User');
-            }
-            const newUser = {
-                id: Math.random() * 500,
-                ...user,
-                rol: '',
-                state: 'PENDING'
-            }
-            resolve(newUser);
-            store.addUser(newUser);
+            if (!user) reject('Invalid User');
+            resolve(user);
+            store.addUser(user);
         })
     }
 
     getUsers() {
         return new Promise((resolve, reject) => {
             const users = store.getUsers()
-            if (users.length > 0 ) resolve(users);
-            else reject('There are no users')
+            users ? resolve(users) : reject('There are no users');
         })
     }
 }

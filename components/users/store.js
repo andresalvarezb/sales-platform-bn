@@ -1,17 +1,19 @@
 const mongoose = require('mongoose');
+const UserModel = require('./model');
 
 
 class UsersDB {
     constructor() {
-        this.listUsers = [];
     }
 
     addUser(user) {
-        this.listUsers.push(user);
+        const newUser = new UserModel(user);
+        newUser.save();
     }
 
-    getUsers() {
-        return this.listUsers;
+    async getUsers() {
+        const users = await UserModel.find();
+        return users;
     }
 }
 
