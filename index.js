@@ -1,14 +1,12 @@
 const express = require('express');
-const db = require('./db');
-const router = express.Router();
-
-db(process.env.DATABASE);
-const port = process.env.PORT || 3000;
 
 const app = express();
+const port = 3000;
+const router = require('./network/routes');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(router);
 
+router(app);
 
 app.listen(port, () => console.log(`Run server http://localhost:${port}`));
