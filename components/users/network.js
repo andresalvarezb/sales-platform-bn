@@ -7,9 +7,16 @@ const controller = new UsersController();
 
 
 // GET
-// router.get('/', (req, res) => {
+router.get('/', (req, res) => {
+    controller.getUsers()
+        .then((listUsers) => {
+            response.success(req, res, listUsers, 200);
+        })
+        .catch((err) => {
+            response.error(req, res, 'Probably the list is empty', 500, err)
+        })
 
-// })
+})
 
 // router.get('/:userId', (req, res) => {
 

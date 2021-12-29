@@ -1,3 +1,5 @@
+const UsersDB = require('./store');
+const store = new UsersDB();
 class UsersController {
     constructor () {
 
@@ -15,7 +17,15 @@ class UsersController {
                 state: 'PENDING'
             }
             resolve(newUser);
+            store.addUser(newUser);
+        })
+    }
 
+    getUsers() {
+        return new Promise((resolve, reject) => {
+            const users = store.getUsers()
+            if (users.length > 0 ) resolve(users);
+            else reject('There are no users')
         })
     }
 }
