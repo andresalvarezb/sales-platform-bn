@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+
+
 class UsersDB {
     constructor() {
         this.listUsers = [];
