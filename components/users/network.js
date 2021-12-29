@@ -18,14 +18,22 @@ router.get('/', (req, res) => {
 
 })
 
-// router.get('/:userId', (req, res) => {
+router.get('/:userId', (req, res) => {
+    const { userId } = req.params;
+    controller.getUser(userId)
+        .then((user) => {
+            response.success(req, res, user, 200);
+        })
+        .catch((err) => {
+            response.error(req, res, 'The ID is wrong', 500, err)
+        })
 
-// });
+})
 
 // POST
 router.post('/', (req, res) => {
     controller.addUser(req.body)
-        .then((user) =>{
+        .then((user) => {
             response.success(req, res, user, 201)
         })
         .catch((err) => {
@@ -33,34 +41,29 @@ router.post('/', (req, res) => {
         })
 });
 
-// PUT
-router.put('/:userId', (req, res) => {
-    const { userId } = req.params;
-    const body = req.body;
-    res.json({
-        userId,
-        message: 'Update User',
-        body
-    });
-});
-
 // PATCH
 router.patch('/:userId', (req, res) => {
     const { userId } = req.params;
-    const body = req.body;
-    res.json({
-        userId,
-        message: 'Update User',
-        body
-    });
+    controller.updateUser(userId, req.body)
+        .then((user) => {
+            response.success(req, res, user, 200)
+        })
+        .catch((err) => {
+            response.error(req, res, err, 400)
+        })
 });
 
-// // DELETE
-// router.patch('/:userId', (req, res) => {
-//     const { userId } = req.params;
-//     res.json({
-//         message: `Delete User ${userId}`,
-//     });
-// });
+
+// DELETE
+router.delete('/:userId', (req, res) => {
+    const { userId } = req.params;
+    controller.deleteUser(userId)
+        .then((user) => {
+            response.success(req, res, user, 200)
+        })
+        .catch((err) => {
+            response.error(req, res, err, 400)
+        })
+});
 
 module.exports = router;
