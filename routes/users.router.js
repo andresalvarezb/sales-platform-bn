@@ -1,24 +1,27 @@
 const express = require('express');
+const UsersService = require('../services/users.service');
 const router = express.Router();
+const service = new UsersService();
 
 // GET
 router.get('/', (req, res) => {
-    res.send('users');
+    const users = service.find();
+    res.json(users);
 })
 
 router.get('/:userId', (req, res) => {
     const { userId } = req.params;
-    res.send('user', userId);
+    const user = service.findOne(userId);
+    res.json(user);
 });
 
 // POST
-router.post('/:userId', (req, res) => {
-    const { userId } = req.params;
-    const body = req.body;
+router.post('/', (req, res) => {
+    const user = req.body;
+    service.create(user)
     res.json({
-        userId,
         message: 'Created User',
-        body
+        body: user
     });
 });
 
