@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const InvoiceModel = require('../invoices/model');
 const { Schema, model } = mongoose;
 
 const UserSchema = new Schema({
@@ -40,6 +41,14 @@ const UserSchema = new Schema({
         enum: ['PENDING', 'AUTHORIZED', 'NO_AUTHORIZED'],
         default: 'PENDING',
     },
+    invoices : [
+        {
+            invoice: {
+                type: Schema.Types.ObjectId,
+                ref: InvoiceModel
+            }
+        }
+    ]
 });
 
 /**
