@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
-const UserModel = require('../users/model');
+// const UserModel = require('../users/model');
 const ProductModel = require('../products/model.js');
 const { Schema, model } = mongoose;
 
 const InvoiceSchema = new Schema({
-    seller: {
-        type: Schema.Types.ObjectId,
-        required: true,
-        ref: UserModel
-    },
+    // seller: {
+    //     type: Schema.Types.ObjectId,
+    //     required: true,
+    //     ref: UserModel
+    // },
     client: {
         clientName: {
             type: String,

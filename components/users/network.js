@@ -27,7 +27,6 @@ router.get('/:userId', (req, res) => {
         .catch((err) => {
             response.error(req, res, 'The ID is wrong', 500, err)
         })
-
 })
 
 // POST

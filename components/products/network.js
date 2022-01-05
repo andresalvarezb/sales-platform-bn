@@ -1,57 +1,77 @@
+const response = require('../../network/response');
 const express = require('express');
+const ProductController = require('./controller');
 const router = express.Router();
-
+const controller = new ProductController();
 
 // GET
 router.get('/', (req, res) => {
-    res.send('Products')
+    controller.getProducts()
+        .then((listProducts) => {
+            response.success(req, res, listProducts, 200)
+        })
+        .catch((err) => {
+            response.error(req, res, err, 401, '[error] empty list')
+        })
 })
 
 
 router.get('/:productId', (req, res) => {
     const { productId } = req.params;
-    res.send('product', productId);
+    controller.getProduct(productId)
+        .then((product) => {
+            response.success(req, res, product, 200)
+        })
+        .catch((err) => {
+            response.error(req, res, err, 401, '[error] Does not exist')
+        })
 });
 
 // POST
-router.post('/:productId', (req, res) => {
-    const { productId } = req.params;
-    const body = req.body;
-    res.json({
-        productId,
-        message: 'Created Product',
-        body
-    });
+router.post('/', (req, res) => {
+    controller.addProduct(req.body)
+        .then((product) => {
+            response.success(req, res, product, 200)
+        })
+        .catch((err) => {
+            response.error(req, res, err, 401, '[error] check parameters')
+        });
 });
 
 // PUT
 router.put('/:productId', (req, res) => {
     const { productId } = req.params;
-    const body = req.body;
-    res.json({
-        productId,
-        message: 'Update Product',
-        body
-    });
+    controller.updateProduct(productId, req.body)
+        .then((product) => {
+            response.success(req, res, product, 200);
+        })
+        .catch((err) => {
+            response.error(req, res, err, 401, '[error] check parameters')
+        });
 });
 
 // PATCH
 router.patch('/:productId', (req, res) => {
     const { productId } = req.params;
-    const body = req.body;
-    res.json({
-        productId,
-        message: 'Update Product',
-        body
-    });
+    controller.updateProductByParams(productId, req.body)
+        .then((product) => {
+            response.success(req, res, product, 200)
+        })
+        .catch((err) => {
+            response.error(req, res, err, 401, 'check the params')
+        })
 });
 
 // DELETE
-router.patch('/:productId', (req, res) => {
+router.delete('/:productId', (req, res) => {
     const { productId } = req.params;
-    res.json({
-        message: `Delete Product ${productId}`,
-    });
+    controller.deleteProduct(productId)
+        .then((product) => {
+            response.success(req, res, product, 200)
+        })
+        .catch((err) => {
+            response.error(req, res, err, 401)
+        })
 });
 
 module.exports = router;

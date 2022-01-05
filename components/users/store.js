@@ -5,10 +5,6 @@ class UsersDB {
     constructor() {
     }
 
-    addUser(user) {
-        const newUser = new UserModel(user);
-        newUser.save();
-    }
 
     async getUsers() {
         const users = await UserModel.find();
@@ -18,6 +14,11 @@ class UsersDB {
     async getUser(userId) {
         const user = await UserModel.findById(userId);
         return user;
+    }
+
+    addUser(user) {
+        const newUser = new UserModel(user);
+        newUser.save();
     }
 
     async updateUser(id, userParams) {
