@@ -4,11 +4,10 @@ const ProductModel = require('../products/model.js');
 const { Schema, model } = mongoose;
 
 const InvoiceSchema = new Schema({
-    // seller: {
-    //     type: Schema.Types.ObjectId,
-    //     required: true,
-    //     ref: UserModel
-    // },
+    date: {
+        type: Date,
+        default: Date.now
+    },
     client: {
         clientName: {
             type: String,
@@ -20,16 +19,16 @@ const InvoiceSchema = new Schema({
             unique: true,
         },
     },
-    date: {
-        type: Date,
-        default: Date.now,
-        required: true,
-    },
+    // salesman: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: UserModel,
+    //     required: true
+    // },
     products: [
         {
             type: Schema.Types.ObjectId,
-            required: true,
             ref: ProductModel,
+            required: true
         }
     ],
     state: {

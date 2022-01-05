@@ -1,6 +1,6 @@
 const ProductModel = require("./model");
 
-class ProductDB {
+class ProductsDB {
     constructor() {
 
     }
@@ -39,4 +39,4 @@ class ProductDB {
     }
 }
 
-module.exports = ProductDB;
+module.exports = ProductsDB;

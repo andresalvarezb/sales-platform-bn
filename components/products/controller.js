@@ -1,6 +1,6 @@
-const ProductDB = require("./store");
-const store = new ProductDB();
-class ProductController {
+const ProductsDB = require("./store");
+const store = new ProductsDB();
+class ProductsController {
     constructor(){
     }
 
@@ -51,4 +51,4 @@ class ProductController {
     }
 }
 
-module.exports = ProductController;
+module.exports = ProductsController;

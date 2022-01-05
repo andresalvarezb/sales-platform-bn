@@ -1,8 +1,8 @@
 const response = require('../../network/response');
 const express = require('express');
-const ProductController = require('./controller');
+const ProductsController = require('./controller');
 const router = express.Router();
-const controller = new ProductController();
+const controller = new ProductsController();
 
 // GET
 router.get('/', (req, res) => {
